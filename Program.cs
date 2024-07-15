@@ -1,11 +1,14 @@
 using BlazorApp.Components;
+using Microsoft.AspNetCore.Hosting.Builder;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
-
+builder.Services.AddSyncfusionBlazor();
+builder.Services.AddSingleton<MessageState>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

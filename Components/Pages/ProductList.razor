@@ -1,0 +1,82 @@
+﻿@page "/productlist"
+@using Syncfusion.Blazor.Notifications
+@using Syncfusion.Blazor
+@attribute [StreamRendering(true)]
+
+<div class="container">
+    <div class="row">
+        @if (Products != null)
+        {
+            foreach(var item in Products){
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <div class="card-header"> @item.Name</div>
+                        <div class="card-body">
+                            <img class="card-img-top" src="images/@item.Image" height="250" />
+                            @item.Description
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+        else{
+            <h6 class="text-center">Streaming..   </h6>
+            for(int i=1;i<=6;i++){
+                <div class="col-md-4 mb-3">
+                    <div class="card">
+                        <SfSkeleton Shape="SkeletonType.Square" Effect="ShimmerEffect.Wave" Height="250px" Width="350px"></SfSkeleton>
+                    </div>
+
+                </div>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    private List<Product> Products { get; set; } = new();
+    protected override async Task OnInitializedAsync(){
+        await LoadData();
+    }
+    private async Task LoadData(){
+        await Task.Delay(5000);
+        Products = new List<Product>(){
+             new Product(){
+                 Id=1,
+                 Name ="Bag1",
+                 Description="sdfgdsf",
+                 Image="bag1.jpg"
+             },
+              new Product(){
+                 Id=2,
+                 Name ="Bag2",
+                 Description="sdfgdsf",
+                 Image="bag2.jpg"
+             },
+              new Product(){
+                 Id=3,
+                 Name ="Bag3",
+                 Description="sdfgdsf",
+                 Image="bag3.jpg"
+             },
+              new Product(){
+                 Id=4,
+                 Name ="Bag4",
+                 Description="sdfgdsf",
+                 Image="bag4.jpg"
+             },
+              new Product(){
+                 Id=5,
+                 Name ="Bag5",
+                 Description="sdfgdsf",
+                 Image="bag5.jpg"
+             },
+              new Product(){
+                 Id=6,
+                 Name ="Bag6",
+                 Description="sdfgdsf",
+                 Image="bag6.jpg"
+             }
+        };
+    }
+}
